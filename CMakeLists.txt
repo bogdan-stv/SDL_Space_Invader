@@ -1,4 +1,4 @@
-Project (SDL_Space_Invaders)
+Project (SDL_Space_Invaders) 
 CMake_Minimum_Required (VERSION 3.1)
 
 find_package(SDL2 REQUIRED)
@@ -30,3 +30,5 @@ Target_Link_Libraries (
  	${SDL2_MIXER_LIBRARIES}
  	${SDL2_IMAGE_LIBRARIES}
 )
+
+
