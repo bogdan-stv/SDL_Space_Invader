@@ -1,9 +1,8 @@
 
 #include "common.h"
-
 #include "init.h"
 
-extern App app;
+extern Game game;
 
 void initSDL(void)
 {
@@ -19,30 +18,19 @@ void initSDL(void)
 		exit(1);
 	}
 
-	app.window = SDL_CreateWindow("Shooter 01", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
+	game.window = SDL_CreateWindow("Space Invaders", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
 
-	if (!app.window)
-	{
-		printf("Failed to open %d x %d window: %s\n", SCREEN_WIDTH, SCREEN_HEIGHT, SDL_GetError());
-		exit(1);
-	}
+	game.renderer = SDL_CreateRenderer(game.window, -1, rendererFlags);
 
-	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+	IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
 
-	app.renderer = SDL_CreateRenderer(app.window, -1, rendererFlags);
-
-	if (!app.renderer)
-	{
-		printf("Failed to create renderer: %s\n", SDL_GetError());
-		exit(1);
-	}
 }
 
 void cleanup(void)
 {
-	SDL_DestroyRenderer(app.renderer);
+	SDL_DestroyRenderer(game.renderer);
 
-	SDL_DestroyWindow(app.window);
+	SDL_DestroyWindow(game.window);
 
 	SDL_Quit();
 }

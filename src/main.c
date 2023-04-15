@@ -6,13 +6,18 @@
 #include "input.h"
 #include "main.h"
 
-App app;
+Game game;
+Player player;
+
 
 int main(int argc, char *argv[])
 {
-	memset(&app, 0, sizeof(App));
+	memset(&game, 0, sizeof(Game));
+	memset(&player, 0, sizeof(Player));
 
 	initSDL();
+
+	player.texture = IMG_LoadTexture(game.renderer, "gfx/player.png");
 
 	atexit(cleanup);
 
@@ -21,6 +26,8 @@ int main(int argc, char *argv[])
 		prepareScene();
 
 		doInput();
+
+		blit(player.texture, player.x, player.y);
 
 		presentScene();
 
