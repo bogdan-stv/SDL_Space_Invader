@@ -29,6 +29,6 @@ Target_Link_Libraries (
  	${SDL2_LIBRARIES}
  	${SDL2_MIXER_LIBRARIES}
  	${SDL2_IMAGE_LIBRARIES}
-)
+)   
 
 
