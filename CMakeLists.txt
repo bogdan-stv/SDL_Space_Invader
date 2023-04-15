@@ -1,4 +1,4 @@
-Project (ppp06)
+Project (SDL_Space_Invaders)
 CMake_Minimum_Required (VERSION 3.1)
 
 find_package(SDL2 REQUIRED)
