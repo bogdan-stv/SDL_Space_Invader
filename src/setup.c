@@ -3,8 +3,8 @@
 #include "setup.h"
 
 extern Game game;
-extern Entity player;
-extern Entity bullet;
+
+//----------------------------INIT--------------------------------//
 
 void initSDL(void)
 {
@@ -43,102 +43,19 @@ void cleanup(void)
 
 void keyDown(SDL_KeyboardEvent *event)
 {
-	if (event->repeat == 0)
-	{
-		if (event->keysym.scancode == SDL_SCANCODE_UP)
-		{
-			game.up = 1;
-		}
+	if (event->repeat == 0 &&  event->keysym.scancode < MAX_KEYBOARD_KEYS)
+    {
+        game.keyboard[event->keysym.scancode] = 1;
+    }
 
-		if (event->keysym.scancode == SDL_SCANCODE_DOWN)
-		{
-			game.down = 1;
-		}
-
-		if (event->keysym.scancode == SDL_SCANCODE_LEFT)
-		{
-			game.left = 1;
-		}
-
-		if (event->keysym.scancode == SDL_SCANCODE_RIGHT)
-		{
-			game.right = 1;
-		}
-        
-        if (event->keysym.scancode == SDL_SCANCODE_LCTRL)
-		{
-			game.fire = 1;
-		}
-	}
 }
 
 void keyUp(SDL_KeyboardEvent *event)
 {
-	if (event->repeat == 0)
-	{
-		if (event->keysym.scancode == SDL_SCANCODE_UP)
-		{
-			game.up = 0;
-		}
-
-		if (event->keysym.scancode == SDL_SCANCODE_DOWN)
-		{
-			game.down = 0;
-		}
-
-		if (event->keysym.scancode == SDL_SCANCODE_LEFT)
-		{
-			game.left = 0;
-		}
-
-		if (event->keysym.scancode == SDL_SCANCODE_RIGHT)
-		{
-			game.right = 0;
-		}
-        
-        if (event->keysym.scancode == SDL_SCANCODE_LCTRL)
-		{
-			game.fire = 0;
-		}
-	}
-}
-
-void moveEntity(void)
-{
-		if (game.up)
-		{
-			player.y -= 4;
-		}
-
-		if (game.down)
-		{
-			player.y += 4;
-		}
-
-		if (game.left)
-		{
-			player.x -= 4;
-		}
-
-		if (game.right)
-		{
-			player.x += 4;
-		}
-
-        if (game.fire && bullet.health == 0)
-        {
-            bullet.health = 1;
-            bullet.x = player.x + 20;
-            bullet.y = player.y + 17;
-            bullet.dx = 15;
-        }
-
-        bullet.x += bullet.dx;
-
-        if (bullet.x > SCREEN_WIDTH)
-		{
-			bullet.health = 0;
-		}
+	if (event->repeat == 0 &&  event->keysym.scancode < MAX_KEYBOARD_KEYS)
+    {
+        game.keyboard[event->keysym.scancode] = 0;
+    }
 }
 
 void doInput(void)

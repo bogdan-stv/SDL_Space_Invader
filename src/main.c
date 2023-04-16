@@ -1,44 +1,68 @@
 #include "common.h"
 
 #include "setup.h"
-#include "main.h"
+#include "level.h"
 
 Game game;
-Entity player;
-Entity bullet;
+Level level;
 
+static void capFrameRate(long *then, float *remainder);
 
 int main(int argc, char *argv[])
 {
+	long then;
+	float remainder;
+
 	memset(&game, 0, sizeof(Game));
-	memset(&player, 0, sizeof(Entity));
-	memset(&bullet, 0, sizeof(Entity));
+
 	initSDL();
 
-	player.x = 100;
-	player.y = 100;
-	player.texture = IMG_LoadTexture(game.renderer, "gfx/player.png");
-	bullet.texture = IMG_LoadTexture(game.renderer, "gfx/playerBullet.png");
-
 	atexit(cleanup);
+
+	initLevel();
+
+	then = SDL_GetTicks();
+
+	remainder = 0;
 
 	while (1)
 	{
 		prepareScene();
 
 		doInput();
-		moveEntity();
 
-		blit(player.texture, player.x, player.y);
-		if(bullet.health == 1)
-		{
-			blit(bullet.texture, bullet.x, bullet.y);
-		}
+		logic();
+
+		draw();
 
 		presentScene();
 
-		SDL_Delay(16);
+		capFrameRate(&then, &remainder);
 	}
 
 	return 0;
+}
+
+static void capFrameRate(long *then, float *remainder)
+{
+	long wait, frameTime;
+
+	wait = 16 + *remainder;
+
+	*remainder -= (int)*remainder;
+
+	frameTime = SDL_GetTicks() - *then;
+
+	wait -= frameTime;
+
+	if (wait < 1)
+	{
+		wait = 1;
+	}
+
+	SDL_Delay(wait);
+
+	*remainder += 0.667;
+
+	*then = SDL_GetTicks();
 }

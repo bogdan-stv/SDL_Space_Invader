@@ -1,21 +1,27 @@
 
+typedef struct Entity Entity;
+
 typedef struct {
 	SDL_Renderer *renderer;
 	SDL_Window   *window;
-    int up;
-    int down;
-    int left;
-    int right;
-    int fire;
+    int keyboard[MAX_KEYBOARD_KEYS];
 	
 } Game;
 
-typedef struct {
-    int x;
-    int y;
+struct Entity{
+    float x;
+    float y;
     int dx;
     int dy;
+    int w;
+    int h;
     int health;
+    int reload;
     SDL_Texture *texture;
-} Entity;
+    Entity *next;
+};
 
+typedef struct {
+    Entity shipHead, *shipTail;
+    Entity bulletHead, *bulletTail;
+} Level;
