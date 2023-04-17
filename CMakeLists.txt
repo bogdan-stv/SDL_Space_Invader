@@ -6,8 +6,6 @@ set(SDL2_MIXER_INCLUDE_DIRS "D:/sdk/SDL2_mixer-2.6.3/x86_64-w64-mingw32/include"
 set(SDL2_IMAGE_INCLUDE_DIRS "D:/sdk/SDL2_image-2.6.3/x86_64-w64-mingw32/include")
 set(SDL2_TTF_INCLUDE_DIRS "D:/sdk/SDL2_ttf-2.20.2/x86_64-w64-mingw32/include")
 
-add_compile_options(-Wall -Wempty-body -Werror -Wstrict-prototypes -Werror=maybe-uninitialized -Warray-bounds -g -lefence)
-
 Include_Directories(
  	${SDL2_INCLUDE_DIRS}
  	${SDL2_MIXER_INCLUDE_DIRS}

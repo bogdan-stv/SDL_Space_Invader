@@ -11,12 +11,13 @@ typedef struct {
 struct Entity{
     float x;
     float y;
-    int dx;
-    int dy;
+    float dx;
+    float dy;
     int w;
     int h;
     int health;
     int reload;
+    int side;
     SDL_Texture *texture;
     Entity *next;
 };
